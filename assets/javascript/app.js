@@ -25,42 +25,38 @@ function buildButtons(){
 }
 
 $(document).on("click", ".btn-search", function(event){
-    event.preventDefault();
-    if ($(this).attr("data-clicked") === "no"){ // Make the API call only if a search button has not already been clicked
-        $(this).attr("data-clicked", "yes"); // Change the data attribute so the same button is not clicked again
+    event.preventDefault();        
+    var searchChar = $(this).data("search");
 
-        var searchChar = $(this).data("search");
-
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + 
-        searchChar + "&api_key=M0zV4qtBn4xLqXhAEfRcIRBxqXnr95Kh&tag=marvel&limit=10";
-        
-        $.ajax({
-            url: queryURL,
-            method: "GET",
-        })
-        .then(function(response){
-            console.log(response);
-            var results = response.data;
-            for (var i = 0; i < results.length; i++){
-                var rating = results[i].rating;
-                if (rating !== "r" && rating !== "pg-13"){
-                    var marvelDiv = $("<div class='giphy'>");
-                    var p = $("<p>").text("Rating: " + rating.toUpperCase());
-                    var meta = "Rating: " + rating + " | " + "Title: " + results[i].title;
-                    var resultImage = $("<img>");
-                    resultImage.attr("src", results[i].images.fixed_height_still.url);
-                    resultImage.attr("title", meta);
-                    resultImage.attr("data-still", results[i].images.fixed_height_still.url);
-                    resultImage.attr("data-gif", results[i].images.fixed_height.url);
-                    resultImage.attr("data-state", "still");
-                    marvelDiv.append(resultImage);
-                    marvelDiv.append(p);
-                    $("#giphyDiv").prepend(marvelDiv);
-                    $("#giphyDiv").show();
-                }
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + 
+    searchChar + "&api_key=M0zV4qtBn4xLqXhAEfRcIRBxqXnr95Kh&tag=marvel&limit=10";
+    
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+    })
+    .then(function(response){
+        $("#giphyDiv").empty();
+        var results = response.data;
+        for (var i = 0; i < results.length; i++){
+            var rating = results[i].rating;
+            if (rating !== "r" && rating !== "pg-13"){
+                var marvelDiv = $("<div class='giphy'>");
+                var p = $("<p>").text("Rating: " + rating.toUpperCase());
+                var meta = "Rating: " + rating.toUpperCase() + "\n" + "Title: " + results[i].title;
+                var resultImage = $("<img>");
+                resultImage.attr("src", results[i].images.fixed_height_still.url);
+                resultImage.attr("title", meta);
+                resultImage.attr("data-still", results[i].images.fixed_height_still.url);
+                resultImage.attr("data-gif", results[i].images.fixed_height.url);
+                resultImage.attr("data-state", "still");
+                marvelDiv.append(resultImage);
+                marvelDiv.append(p);
+                $("#giphyDiv").prepend(marvelDiv);
+                $("#giphyDiv").show();
             }
-        });
-    }
+        }
+    });
 });
 
 $(document).on("click", "img", function(){
