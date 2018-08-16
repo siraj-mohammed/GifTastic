@@ -1,0 +1,43 @@
+body {
+    font-family: Verdana, 'Segoe UI', Tahoma, Geneva, sans-serif;
+    background: url("../images/diagmonds.png");
+    color: lightblue;
+    font-size: 14px;
+}
+
+h1{
+    background: -webkit-linear-gradient(left, rgba(183,222,237,1) 0%,rgba(185,119,198,1) 40%,rgba(185,119,198,1) 40%,rgba(113,206,239,1) 76%,rgba(183,222,237,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(183,222,237,1) 0%,rgba(185,119,198,1) 40%,rgba(185,119,198,1) 40%,rgba(113,206,239,1) 76%,rgba(183,222,237,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+
+hr{   
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgba(185,119,198,1);
+    padding: 0; 
+    width: 75%;
+}
+
+.btn{
+    margin: 5px;
+    margin-left: 0px;
+}
+
+img {
+    margin: 8px;
+    margin-bottom: 0;    
+}
+
+#giphyDiv {
+    border-top: 1px solid rgba(113,206,239,1);
+    border-right: 1px solid rgba(185,119,198,1);
+}
+
+.giphy{
+    float: left;
+}
